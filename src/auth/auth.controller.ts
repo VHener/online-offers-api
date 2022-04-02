@@ -24,6 +24,7 @@ export class AuthController {
   }
 
   @Post('register')
+  //@UseGuards(AuthGuard('jwt'))
   async register(@Body() registerDTO: RegisterDTO) {
     const user = await this.userService.create(registerDTO);
     const payload = {

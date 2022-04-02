@@ -4,6 +4,7 @@ import * as bcrypt from 'bcrypt';
 export const UserSchema = new Schema({
   email: { type: String, unique: true, required: true },
   password: { type: String, required: true },
+  name: { type: String, required: true },
 });
 
 UserSchema.pre('save', async function (next) {
@@ -13,6 +14,7 @@ UserSchema.pre('save', async function (next) {
     }
     const hashed = await bcrypt.hash(this['password'], 10);
     this['password'] = hashed;
+
     return next();
   } catch (err) {
     return next(err);

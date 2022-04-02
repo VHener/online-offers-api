@@ -13,9 +13,10 @@ export class UserService {
 
   async create(RegisterDTO: RegisterDTO) {
     const { email } = RegisterDTO;
+
     const user = await this.userModel.findOne({ email });
     if (user) {
-      throw new HttpException('user already exists', HttpStatus.BAD_REQUEST);
+      throw new HttpException('Usuário já existe.', HttpStatus.BAD_REQUEST);
     }
 
     const createdUser = new this.userModel(RegisterDTO);
